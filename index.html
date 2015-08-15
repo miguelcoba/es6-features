@@ -99,51 +99,90 @@
 						<h2>Arrow</h2>
 						<h4>Expression body</h4>
 						<p>Returns the value of the expression</p>
+					</section>
+					<section>
+						<h2>Arrow</h2>
+						<h4>Expression body - Single argument</h4>
+						<p>Classic</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var numbers = [1, 2, 3];
-numbers.map( v => v * v );  // Single argument
-// numbers.map(function(v) { return v * v });
-// returns [1, 4, 9];
+numbers.map(function(v) { return v * v }); // [1, 4, 9];
+						</code></pre>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var numbers = [1, 2, 3];
+numbers.map( v => v * v ); // [1, 4, 9];
+						</code></pre>
+					</section>
+					<section>
+						<h2>Arrow</h2>
+						<h4>Expression body - Multiple arguments</h4>
+						<p>Classic</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var numbers = [1, 2, 3];
+numbers.map(function(v, idx) { return v * idx }); // [0, 2, 6];
+						</code></pre>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var numbers = [1, 2, 3];
+numbers.map( (v, idx) => v * idx ); // [0, 2, 6];
 						</code></pre>
 					</section>
 					<section>
 						<h2>Arrow</h2>
 						<h4>Expression body</h4>
-						<p>Returns the value of the expression</p>
+						<p>Classic</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var numbers = [1, 2, 3];
-numbers.map( (v, idx) => v * idx );  // Multiple arguments
-// numbers.map(function(v, idx) { return v * idx });
-// returns [0, 2, 6];
+numbers.map( function(v, idx) { return { i: idx, v: v.toString() }; } );
+// [{ i: 0, v: "1" }, { i: 1, v: "2" }, { i: 2, v: "3" }];
 						</code></pre>
-					</section>
-					<section>
-						<h2>Arrow</h2>
-						<h4>Expression body</h4>
-						<p>Returns the value of the expression</p>
+						<p>ECMAScript 6</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var numbers = [1, 2, 3];
-numbers.map( (v, idx)  => ({ i: idx, v: v.toString() }) );
-// returns [{ i: 0, v: "0" }, { i: 1, v: "1" }, { i: 2, v: "2" }];
+numbers.map( (v, idx) => ({ i: idx, v: v.toString() }) );
+// [{ i: 0, v: "1" }, { i: 1, v: "2" }, { i: 2, v: "3" }];
 						</code></pre>
 					</section>
 					<section>
 						<h2>Arrow</h2>
 						<h4>Block body</h4>
 						<p>Explicit return value, or undefined if no especified</p>
+					</section>
+					<section>
+						<h2>Arrow</h2>
+						<h4>Block body - Explicit return value</h4>
+						<p>Classic</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var words = ['some', 'random', 'words'];
-words.filter( w  => {  // explicit return
+words.filter( function(w) {
   var l = w.length;
   return l % 2 === 0; 
-});
-// returns ['some', 'random'];
+}); // ['some', 'random'];
+						</code></pre>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var words = ['some', 'random', 'words'];
+words.filter( w  => {
+  var l = w.length;
+  return l % 2 === 0; 
+}); // ['some', 'random'];
 						</code></pre>
 					</section>
 					<section>
 						<h2>Arrow</h2>
-						<h4>Block body</h4>
-						<p>Explicit return value, or undefined if no especified</p>
+						<h4>Block body - No return value</h4>
+						<p>Classic</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var words = ['some', 'random', 'words'];
+words.forEach( function(w) {
+  console.log('Word:', w);
+});
+// Word: some
+// Word: random
+// Word: worlds
+						</code></pre>
+						<p>ECMAScript 6</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var words = ['some', 'random', 'words'];
 words.forEach( w  => { // no return value
@@ -176,46 +215,98 @@ words.forEach( w  => { // no return value
 					</section>
 					<section>
 						<h2>Classes</h2>
+						<p>Classic</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var Person = function (name) {
+  this.name = name;
+};
+Person.prototype.sayHello = function() {
+  console.log("Hello, I'm " + this.name);
+};
+var john = new Person("John");
+john.sayHello(); // Hello, I'm John
+console.log('name:', john.name); // name: John
+						</code></pre>
+					</section>
+					<section>
+						<h2>Classes</h2>
+						<p>ECMAScript 6</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 class Person {
-  constructor (name, age) {
+  constructor (name) {
     this.name = name; // properties accessed with this keyword
   }
   get nickname() {
     return 'lil ' + this.name; // nickname only readable, never writable
   }
   sayHello() { //
-    console.log('Hi, I am', this.name);
+    console.log("Hello, I'm " + this.name);
   }
 }
-var john = new Person('John', 25);
-john.sayHello(); // Hi, I am John
+var john = new Person('John');
+john.sayHello(); // Hello, I'm John
 console.log('name:', john.name); // name: John
 console.log('nickname:', john.nickname); // Nickname: lil John
 john.nickname = 'Johnny';  // Error
 						</code></pre>
 					</section>
 					<section>
-						<h2>Classes</h2>
-						<p>Subclassing</p>
+						<h2>Classes - Subclasses</h2>
+						<p>Classic</p>
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
-class Animal { 
-  constructor(name) {
-    this.name = name;
+function Student(name, subject) { // Define the Student constructor
+  Person.call(this, name); // Calls parent constructor
+  this.subject = subject;
+};
+// Create a Student.prototype object that inherits from Person.prototype.
+Student.prototype = Object.create(Person.prototype);
+// Set the "constructor" property to refer to Student
+Student.prototype.constructor = Student;
+// Override the "sayHello" method
+Student.prototype.sayHello = function(){
+  console.log("Hello, I'm " + this.name + ". I'm studying " + this.subject + ".");
+};
+// Add a "sayGoodBye" method
+Student.prototype.sayGoodBye = function(){
+  console.log("Goodbye!");
+};
+
+var janet = new Student("Janet", "Applied Physics");
+janet.sayHello();   // "Hello, I'm Janet. I'm studying Applied Physics."
+janet.sayGoodBye(); // "Goodbye!"
+
+// Check that instanceof works correctly
+console.log(janet instanceof Person);  // true 
+console.log(janet instanceof Student); // true
+						</code></pre>
+					</section>
+	
+					<section>
+						<h2>Classes - Subclasses</h2>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+class Student extends Person {
+  constructor(name, subject) {
+    super(name); // Calls parent constructor
+    this.subject = subject;
   }
-  speak() {
-    console.log(this.name + ' makes a noise.');
+  // Override the "sayHello" method
+  sayHello() {
+    console.log("Hello, I'm " + this.name + ". I'm studying " + this.subject + ".");
   }
+  // Add a "sayGoodBye" method
+  sayGoodBye(){
+    console.log("Goodbye!");
+  };
 }
-class Dog extends Animal {
-  speak() {
-    console.log(this.name + ' barks.');
-  }
-}
-var animal = new Animal('animal'),
-    spot = new Dog('spot');
-animal.speak();
-spot.speak();
+
+var janet = new Student("Janet", "Applied Physics");
+janet.sayHello();   // "Hello, I'm Janet. I'm studying Applied Physics."
+janet.sayGoodBye(); // "Goodbye!"
+
+// Check that instanceof works correctly
+console.log(janet instanceof Person);  // true 
+console.log(janet instanceof Student); // true
 						</code></pre>
 					</section>
 				</section>

@@ -88,7 +88,6 @@
 					</section>
 					<section>
 						<h2>Arrow</h2>
-						<p></p>
 						<ul>
 							<li class="fragment">Similar to analogous feature in CoffeeScript, Java 8 and C#</li>
 							<li class="fragment">Support <em>block</em> or <em>expression</em> bodies</li>
@@ -310,6 +309,49 @@ console.log(janet instanceof Student); // true
 						</code></pre>
 					</section>
 				</section>
+
+				<section>
+					<section>
+						<h2>Enhanced Object Literals</h2>
+						<ul>
+							<li class="fragment">Setting prototype at construction</li>
+							<li class="fragment">Shorthand for <code>foo: foo</code> properties</li>
+							<li class="fragment">Defining methods</li>
+							<li class="fragment">Making <code>super</code> calls</li>
+							<li class="fragment">Property names with expressions</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Enhanced Object Literals</h2>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+function SomeConstructor () {};
+SomeConstructor.prototype.someMethod = function() {
+  console.log('someMethod executed');
+}
+var obj = {
+  // __proto__
+  __proto__: SomeConstructor.prototype,
+  // Shorthand for ‘parseInt: parseInt’
+  parseInt,
+  // Methods
+  toString() {
+    // Super calls
+    return "d: " + super.toString();
+  },
+  // Computed (dynamic) property names
+  [ 'prop_' + (() => 42)() ]: 42
+};
+
+console.log(obj.parseInt('2')*obj.parseInt('-1'));  // -2
+console.log(obj.toString()); // d: [object Object]
+console.log(obj.prop_42); // 42
+console.log(obj.someMethod.call()); // 'someMethod executed'
+						</code></pre>
+					</section>
+				</section>
+
+
 
 				<section>
 						<h1>Thank you!</h1>

@@ -402,7 +402,6 @@ var b = 10;
 console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);
 // "Fifteen is 15 and
 // not 20."
-
 						</code></pre>
 					</section>
 					<section>
@@ -454,6 +453,53 @@ fn(["Hello ", "! You are looking ", " today!"], you, adjective);
 							<li class='fragment'>Other complex substitutions</li>
 						</ul>
 					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Destructuring assignment</h2>
+						<p>Allows binding using pattern matching</p>
+						<p>Support for arrays and objects</p>
+						<p>Fail-soft semantics, producing undefined values when impossible to bind a value to a variable</p>
+					</section>
+					<section>
+						<h2>Destructuring assignment</h2>
+						<p>Classic</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var foo = ["one", "two", "three"];
+
+var one   = foo[0];
+var two   = foo[1];
+var three = foo[2];
+						</code></pre>
+						<p>ECMAScript 6</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var foo = ["one", "two", "three"];
+
+var [one, two, three] = foo;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Destructuring assignment 2</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+// Assignment without declaration
+var a, b;
+[a, b] = [1, 2];
+
+// Swapping variables
+var a = 1, b = 3;
+[a, b] = [b, a];
+
+// Multiple return value
+function f() { return [1, 2]; }
+var a, b, array;
+[a, b] = f(); // 1 to 1 assignment: a is 1, b is 2
+array = f(); // store return value as an array: a is [1, 2]
+
+// fail-soft
+var [a] = [];
+console.log(a === undefined); // true
+						</code></pre>
 				</section>
 	
 

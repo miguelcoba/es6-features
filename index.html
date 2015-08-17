@@ -637,7 +637,123 @@ interface Iterable {
 						</code></pre>
 					</section>
 				</section>
-	
+
+				<section>
+					<section>
+						<h2>Map + Set + WeakMap + WeakSet</h2>
+					</section>
+					<section>
+						<h2>Map</h2>
+						<ul>
+							<li>Simple key/value map</li>
+							<li>Any value (both objects and primitive values) may be used as either a key or a value</li>
+						</li>
+					</section>
+					<section>
+						<h2>Map</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var myMap = new Map();
+
+var keyObj = {},
+    keyFunc = function () {},
+    keyString = "a string";
+
+// setting the values
+myMap.set(keyString, "value associated with 'a string'");
+myMap.set(keyObj, "value associated with keyObj");
+myMap.set(keyFunc, "value associated with keyFunc");
+
+myMap.size; // 3
+
+// getting the values
+myMap.get(keyString);    // "value associated with 'a string'"
+myMap.get(keyObj);       // "value associated with keyObj"
+myMap.get(keyFunc);      // "value associated with keyFunc"
+
+myMap.get("a string");   // "value associated with 'a string'"
+                         // because keyString === 'a string'
+myMap.get({});           // undefined, because keyObj !== {}
+myMap.get(function() {}) // undefined, because keyFunc !== function () {}
+						</code></pre>
+					</section>
+					<section>
+						<h2>Set</h2>
+						<ul>
+							<li>Lets you store <em>unique</em> values</li>
+							<li>Can store primitive values or object references</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Set</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var mySet = new Set();
+
+mySet.add(1);
+mySet.add(5);
+mySet.add("some text");
+var o = {a: 1, b: 2};
+mySet.add(o);
+
+mySet.has(1); // true
+mySet.has(3); // false, 3 has not been added to the set
+mySet.has(5);              // true
+mySet.has(Math.sqrt(25));  // true
+mySet.has("Some Text".toLowerCase()); // true
+mySet.has(o); // true
+
+mySet.size; // 4
+
+mySet.delete(5); // removes 5 from the set
+mySet.has(5);    // false, 5 has been removed
+
+mySet.size; // 3, we just removed one value
+						</code></pre>
+					</section>
+					<section>
+						<h2>WeakMap</h2>
+						<ul>
+							<li>Collection of key/value pairs in which the keys are weakly referenced</li>
+							<li>The keys must be objects and the values can be arbitrary values</li>
+							<li>Primitive data types as keys are <em>not</em> allowed</li>
+							<li>The key in a WeakMap is held weakly: if there are no <em>other strong references</em> to the <strong>key</strong>, then the <em>entire entry</em> will be removed from the WeakMap by the garbage collector.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>WeakMap</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var wm = new WeakMap();
+// As there is no other reference to the key, the whole entry 
+// will be garbage collected
+wm.set({}, { extra: 42 });
+console.log(wm.size === undefined); // true
+console.log(wm.has({})); // false
+						</code></pre>
+					</section>
+					<section>
+						<h2>WeakSet</h2>
+						<ul>
+							<li>The WeakSet object lets you store weakly held objects in a collection</li>
+							<li>References to objects in the collection are held weakly: If there is no other reference to an object stored in the WeakSet, they can be garbage collected</li>
+							<li>There is no list of current objects stored in the collection</li>
+							<li>WeakSets are not enumerable.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>WeakSet</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+// No other reference to the object added, so it is garbage collected
+var ws = new WeakSet();
+ws.add({ data: 42 });
+console.log(ws.has({ data: 42 })); // false
+
+// obj holds a reference to the object so is not garbage collected
+var obj = {a: 'string'};
+ws.add(obj);
+console.log(ws.has(obj)); // true
+						</code></pre>
+					</section>
+				</section>
+
 
 				<section>
 					<h1>References</h1>
@@ -647,6 +763,12 @@ interface Iterable {
 <p><a href='https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en'>https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en</a></p>
 https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/let
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
+
+						</code></pre>
 				</section>
 
 

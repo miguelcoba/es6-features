@@ -500,8 +500,155 @@ array = f(); // store return value as an array: a is [1, 2]
 var [a] = [];
 console.log(a === undefined); // true
 						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Default + Rest + Spread</h2>
+						<p>Default values: Callee-evaluated default parameter values</p>
+						<p>Rest arguments: Turn an array into consecutive arguments in a function call</p>
+						<p>Spread values: passes each element of an array as an single argument</p>
+					</section>
+					<section>
+						<h2>Default + Rest + Spread</h2>
+						<p>Default values: Callee-evaluated default parameter values</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+function f(x, y=12) {
+  // y is 12 if not passed (or passed as undefined)
+  return x + y;
+}
+console.log(f(3) === 15);  // true
+						</code></pre>
+					</section>
+					<section>
+						<h2>Default + Rest + Spread</h2>
+						<p>Rest arguments: Turn an array into consecutive arguments in a function call</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+function f(x, ...y) {
+  // y is an Array
+  return x * y.length;
+}
+console.log(f(3, "hello", true) === 6); // true
+						</code></pre>
+					</section>
+					<section>
+						<h2>Default + Rest + Spread</h2>
+						<p>Spread values: passes each element of an array as an single argument</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+function f(x, y, z) {
+  return x + y + z;
+}
+// Pass each elem of array as argument
+console.log(f(...[1,2,3]) === 6); // true
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Let + Const</h2>
+						<p>Block scoped bindings</p>
+					</section>
+					<section>
+						<h2>Let + Const</h2>
+						<p>Let: declares a block scope local variable, optionally initializing it to a value</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var a = 5;
+var b = 10;
+
+if (a === 5) {
+  let a = 4; // The scope is inside the if-block
+  var b = 1; // The scope is inside the function
+
+  console.log(a);  // 4
+  console.log(b);  // 1
+} 
+
+console.log(a); // 5
+console.log(b); // 1
+						</code></pre>
+					</section>
+					<section>
+						<h2>Let + Const</h2>
+						<p>Const: creates a read-only named constant</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+const MY_FAV = 7;
+
+MY_FAV = 20; // trying to modify constant after declaration throws an error
+
+const MY_FAV = 20; // trying to redeclare a constant throws an error 
+
+var MY_FAV = 20; // throws error: the name MY_FAV is reserved for constant above
+
+const FOO; // SyntaxError:  const requires an initializer
+
+const MY_OBJECT = {"key": "value"}; // const also works on objects
+
+MY_OBJECT = {"OTHER_KEY": "value"}; // overwriting the object fails as above
+
+MY_OBJECT.key = "otherValue"; // object attributes are not protected
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Iterator + for..of</h2>
+						<p>Iterator: Establishes "iterable" protocol to allow objects to customize their iteration behaviour</p>
+						<p>for..of: convenient operator to iterate over all <em>values</em> of an iterable object</p>
+					</section>
+					<section>
+						<h2>Iterator + for..of</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+let fibonacci = {
+  [Symbol.iterator]() {
+    let pre = 0, cur = 1;
+    return {
+      next() {
+        [pre, cur] = [cur, pre + cur];
+        return { done: false, value: cur }
+      }
+    }
+  }
+}
+for (var n of fibonacci) {
+  if (n > 1000) // truncate the sequence at 1000
+    break;
+  console.log(n);
+}
+						</code></pre>
+					</section>
+					<section>
+						<h2>Iterator + for..of</h2>
+						<p>Iteration works if the code complies with those interfaces</p>
+						<pre><code class="typescript" data-trim style="font-size: 18px;">
+// TypeScript syntax
+interface IteratorResult {
+  done: boolean;
+  value: any;
+}
+interface Iterator {
+  next(): IteratorResult;
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+						</code></pre>
+					</section>
 				</section>
 	
+
+				<section>
+					<h1>References</h1>
+<p class=small><a href='https://github.com/lukehoban/es6features'>https://github.com/lukehoban/es6features</a></p>
+<p><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes'>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes</a></p>
+<p><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment'>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/ Operators/Destructuring_assignment</a></p>
+<p><a href='https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en'>https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en</a></p>
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/let
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const 
+				</section>
+
 
 				<section>
 						<h1>Thank you!</h1>

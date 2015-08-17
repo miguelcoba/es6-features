@@ -647,7 +647,7 @@ interface Iterable {
 						<ul>
 							<li>Simple key/value map</li>
 							<li>Any value (both objects and primitive values) may be used as either a key or a value</li>
-						</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Map</h2>
@@ -754,23 +754,64 @@ console.log(ws.has(obj)); // true
 					</section>
 				</section>
 
+				<section>
+					<section>
+						<h2>Proxies</h2>
+					</section>
+					<section>
+						<h2>Proxies</h2>
+						<ul>
+							<li>Used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc)</li>
+							<li>Can be used for interception, object virtualization, logging/profiling, etc.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Proxy - Object</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var target = { world: 'Mars'};
+var handler = {
+  get: function (receiver, name) {
+    return `Hello, ${name}! from ${receiver[name]}`;
+  }
+};
+
+var p = new Proxy(target, handler);
+console.log(p.world === 'Hello, world! from Mars'); // true
+						</code></pre>
+					</section>
+					<section>
+						<h2>Proxy - Function</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var target = function () { return 'I am the target'; };
+var handler = {
+  apply: function (receiver, ...args) {
+    return 'I am the proxy, and ' + receiver(args);
+  }
+};
+
+var p = new Proxy(target, handler);
+console.log(p() === 'I am the proxy, and I am the target'); // true
+						</code></pre>
+					</section>
+				</section>
 
 				<section>
 					<h1>References</h1>
-<p class=small><a href='https://github.com/lukehoban/es6features'>https://github.com/lukehoban/es6features</a></p>
-<p><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes'>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes</a></p>
-<p><a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment'>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/ Operators/Destructuring_assignment</a></p>
-<p><a href='https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en'>https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en</a></p>
-https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/let
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
+					<ul style="font-size:16px">
+						<li><a href='https://github.com/lukehoban/es6features'>https://github.com/lukehoban/es6features</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/ Operators/Destructuring_assignment</a></li>
+						<li><a href='https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en'>https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/let'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/let</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/const'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/const</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap</a></li>
+						<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakSet'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakSet</a></li>
 
-						</code></pre>
+<li><a href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy'>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy</a></li>
+					</ul>
 				</section>
-
 
 				<section>
 						<h1>Thank you!</h1>

@@ -796,6 +796,40 @@ console.log(p() === 'I am the proxy, and I am the target'); // true
 				</section>
 
 				<section>
+					<section>
+						<h2>Symbols</h2>
+					</section>
+					<section>
+						<h2>Symbols</h2>
+						<ul>
+							<li>New primitive type</li>
+							<li>They are tokens that serve as unique IDs</li>
+							<li>have an optional string-valued parameter that lets you give the symbol a description</li>
+							<li>Can be used as an identifier for object properties</li>
+							<li>Using symbols instead of strings allows different modules to create properties that don't conflict with one another</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Symbols</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var sym1 = Symbol();
+var sym2 = Symbol("foo");
+var sym3 = Symbol("some description");
+
+// It creates a new symbol each time
+console.log(Symbol("foo") === Symbol("foo")); // false
+
+// Can be used as a property key
+var sym = Symbol("foo");
+var obj = {
+  [sym]: 1
+};
+console.log(obj[sym]); // 1
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
 					<h1>References</h1>
 					<ul style="font-size:16px">
 						<li><a href='https://github.com/lukehoban/es6features'>https://github.com/lukehoban/es6features</a></li>

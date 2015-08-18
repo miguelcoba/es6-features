@@ -63,20 +63,20 @@
 						<h2>Features</h2>
 						<p class="fragment">Arrows</p>
 						<p class="fragment">Classes</p>
+						<p class="fragment">Modules</p>
 						<p class="fragment">Enhanced Object Literal</p>
 						<p class="fragment">Template Strings</p>
 						<p class="fragment">Destructuring</p>
 						<p class="fragment">Default + Rest + Spread</p>
-						<p class="fragment">Let + Const</p>
 					</section>
 					<section>
 						<h2>Features</h2>
+						<p class="fragment">Let + Const</p>
 						<p class="fragment">Iterator + For..Of</p>
 						<p class="fragment">Map + Set + WeakMap + WeakSet</p>
 						<p class="fragment">Proxies</p>
 						<p class="fragment">Symbols</p>
 						<p class="fragment">Promises</p>
-						<p class="fragment">Reflect</p>
 						<p class="fragment">Tail Calls</p>
 					</section>
 				</section>
@@ -306,6 +306,87 @@ janet.sayGoodBye(); // "Goodbye!"
 // Check that instanceof works correctly
 console.log(janet instanceof Person);  // true 
 console.log(janet instanceof Student); // true
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Modules</h2>
+						<ul>
+							<li class="fragment">Each module is defined in its own file</li>
+							<li class="fragment">Functions or variables defined in a module are not visible outside unless you explicitly export them</li>
+							<li class="fragment">Two kinds of exports: named exports (several per module) and default exports (one per module)</li>
+							<li class="fragment">To export certain variables from a module you just use the keyword <code>export</code></li>
+							<li class="fragment">to consume the exported variables in a different module you use <code>import</code></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Modules</h2>
+						<p>Named exports (several per module)</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+// circles.js
+export const PI = 3.1415;
+export function area(radius) {
+  return PI * radius * radius;
+}
+export function perimeter(radius) {
+  return 2 * PI * radius;
+}
+
+// app.js
+import { area, perimeter } from 'circles'; // import some objects
+console.log(area(5)); // 78.54
+console.log(perimeter(3)); // 18.85
+						</code></pre>
+					</section>
+					<section>
+						<h2>Modules</h2>
+						<p>Named exports (several per module) 2</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+// circles.js
+export const PI = 3.1415;
+export function area(radius) {
+  return PI * radius * radius;
+}
+export function perimeter(radius) {
+  return 2 * PI * radius;
+}
+
+// app.js
+import * as circles from 'circles'; // import whole module
+console.log(circles.area(5)); // 78.54
+console.log(circles.perimeter(3)); // 18.85
+						</code></pre>
+					</section>
+					<section>
+						<h2>Modules</h2>
+						<p>Default exports (one per module)</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+// library.js
+export default function () { ... };
+
+// app.js
+import f from 'library'; // You can import it and use any name to refer to it
+f();
+						</code></pre>
+					</section>
+					<section>
+						<h2>Modules</h2>
+						<p>Default and named exports</p>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+ // underscore.js
+export default function (obj) {
+  ...
+};
+export function each(obj, iterator, context) {
+  ...
+}
+export { each as forEach }; // some alias for an export
+
+// app.js
+import _, { each } from 'underscore'; 
+// default import with no braces, named imports inside braces
 						</code></pre>
 					</section>
 				</section>
@@ -845,17 +926,44 @@ console.log(obj[sym]); // 1
 						<pre><code class="javascript" data-trim style="font-size: 18px;">
 var someLongProcess = function() {
   console.log(`starting: ${new Date()}`);
-	return new Promise(function(resolve, reject) {
-      setTimeout(function() {
-        resolve('some value');
-      }, 2000);
-	});
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve('some value');
+    }, 2000);
+  });
 };
-
 
 someLongProcess().then(function(value) {
   console.log(`ending with ${value}: ${new Date()}`);
 });
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Tail calls</h2>
+					</section>
+					<section>
+						<h2>Tail calls</h2>
+						<ul>
+							<li>A tail call is a subroutine call performed as the <em>final</em> action of a procedure</li>
+							<li>Calls in tail-position are guaranteed to not grow the stack unboundedly</li>
+							<li>Recursive algorithms are guaranteed constant-space</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Tail calls</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+function factorial(n, acc = 1) {
+  'use strict';
+   if (n <= 1) return acc;
+   return factorial(n - 1, n * acc);
+}
+
+// Stack overflow in most implementations today,
+// but safe on arbitrary inputs in ES6
+factorial(100000)
 						</code></pre>
 					</section>
 				</section>

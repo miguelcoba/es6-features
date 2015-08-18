@@ -830,6 +830,39 @@ console.log(obj[sym]); // 1
 				</section>
 
 				<section>
+					<section>
+						<h2>Promise</h2>
+					</section>
+					<section>
+						<h2>Promise</h2>
+						<ul>
+							<li>Used for deferred and asynchronous computations</li>
+							<li>represents an operation that hasn't completed yet, but is expected in the future</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Promise</h2>
+						<pre><code class="javascript" data-trim style="font-size: 18px;">
+var someLongProcess = function() {
+  console.log(`starting: ${new Date()}`);
+	return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        resolve('some value');
+      }, 2000);
+	});
+};
+
+
+someLongProcess().then(function(value) {
+  console.log(`ending with ${value}: ${new Date()}`);
+});
+						</code></pre>
+					</section>
+				</section>
+
+
+
+				<section>
 					<h1>References</h1>
 					<ul style="font-size:16px">
 						<li><a href='https://github.com/lukehoban/es6features'>https://github.com/lukehoban/es6features</a></li>
